@@ -147,7 +147,7 @@ export default function HomePage() {
       <section className="mx-5 mb-20 overflow-hidden rounded-[2rem] bg-coral px-6 py-14 text-center text-white sm:px-12">
         <h2 className="font-display text-3xl font-bold sm:text-4xl">Siap melihat anak membuat karya pertamanya?</h2>
         <p className="mx-auto mt-4 max-w-xl text-lg leading-8 text-orange-50">Kenali minat anak melalui pengalaman trial class bersama mentor Sabda Academy.</p>
-        <ButtonLink href="/daftar-trial" className="mt-8 bg-white text-ink hover:bg-orange-50">Daftar Trial Class</ButtonLink>
+        <ButtonLink href="/daftar-trial" variant="secondary" className="mt-8 border-transparent hover:bg-orange-50">Daftar Trial Class</ButtonLink>
       </section>
     </>
   );

@@ -10,7 +10,7 @@ export default function ContactPage() {
           <p className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-yellow-300">Kanal utama</p>
           <h2 className="mt-5 font-display text-3xl font-bold">Chat dengan tim Sabda Academy.</h2>
           <p className="mt-4 leading-8 text-blue-100">Ceritakan usia dan minat anak. Kami akan membantu menjawab pertanyaan serta merekomendasikan langkah berikutnya.</p>
-          <ButtonLink href="/daftar-trial" className="mt-8 bg-yellow-300 text-ink hover:bg-yellow-200">Daftar Trial Class</ButtonLink>
+          <ButtonLink href="/daftar-trial" variant="accent" className="mt-8">Daftar Trial Class</ButtonLink>
         </div>
         <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-card">
           <h2 className="font-display text-2xl font-bold text-ink">Informasi kontak</h2>

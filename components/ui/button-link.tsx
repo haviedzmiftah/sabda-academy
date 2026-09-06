@@ -6,15 +6,17 @@ import { trackEvent } from "@/lib/analytics";
 type ButtonLinkProps = {
   href: string;
   children: React.ReactNode;
-  variant?: "primary" | "secondary";
+  variant?: "primary" | "secondary" | "accent";
   className?: string;
 };
 
 export function ButtonLink({ href, children, variant = "primary", className = "" }: ButtonLinkProps) {
   const styles =
     variant === "primary"
-      ? "bg-ink text-white hover:bg-blue-900"
-      : "border border-slate-300 bg-white text-ink hover:border-ink";
+      ? "bg-blue-800 text-white hover:bg-blue-900"
+      : variant === "accent"
+        ? "bg-yellow-300 text-ink hover:bg-yellow-200"
+        : "border border-slate-300 bg-white text-ink hover:border-ink";
 
   return (
     <Link
