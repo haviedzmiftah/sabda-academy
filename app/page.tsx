@@ -1,10 +1,20 @@
 import Link from "next/link";
 import { ButtonLink } from "@/components/ui/button-link";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { JsonLd } from "@/components/seo/json-ld";
+import { absoluteUrl } from "@/lib/site";
 
 export default function HomePage() {
   return (
     <>
+      <JsonLd data={{
+        "@context": "https://schema.org",
+        "@type": "EducationalOrganization",
+        name: "Sabda Academy",
+        url: absoluteUrl("/"),
+        description: "Bimbel coding anak berbasis project untuk mengembangkan kreativitas dan problem solving.",
+        sameAs: [],
+      }} />
       <section className="overflow-hidden border-b border-slate-200 bg-canvas">
         <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 py-16 md:grid-cols-[1fr_0.9fr] md:py-24">
           <div>

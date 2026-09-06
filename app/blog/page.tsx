@@ -1,5 +1,13 @@
 import Link from "next/link";
 import { getContentList } from "@/lib/content";
+import type { Metadata } from "next";
+import { absoluteUrl } from "@/lib/site";
+
+export const metadata: Metadata = {
+  title: "Blog",
+  description: "Artikel dan panduan belajar coding untuk anak dan orang tua.",
+  alternates: { canonical: absoluteUrl("/blog") },
+};
 
 function formatDate(date: string) {
   return new Intl.DateTimeFormat("id-ID", { dateStyle: "long" }).format(new Date(`${date}T00:00:00`));

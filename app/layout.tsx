@@ -5,6 +5,7 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { WhatsAppButton } from "@/components/conversion/whatsapp-button";
 import { GoogleAnalytics } from "@/components/analytics/google-analytics";
+import { absoluteUrl } from "@/lib/site";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -26,11 +27,15 @@ export const metadata: Metadata = {
   },
   description:
     "Sabda Academy membantu anak belajar coding, kreativitas, dan problem solving melalui project yang menyenangkan.",
+  alternates: { canonical: absoluteUrl("/") },
+  robots: { index: true, follow: true },
   openGraph: {
     type: "website",
     siteName: "Sabda Academy",
     locale: "id_ID",
+    url: absoluteUrl("/"),
   },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
@@ -38,8 +43,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="id" className={`${inter.variable} ${jakarta.variable}`}>
       <body className="font-sans antialiased">
         <GoogleAnalytics />
+        <a href="#main-content" className="focus-ring sr-only absolute left-4 top-4 z-50 rounded-lg bg-white px-4 py-3 font-bold text-ink focus:not-sr-only">
+          Lewati ke konten utama
+        </a>
         <SiteHeader />
-        <main>{children}</main>
+        <main id="main-content">{children}</main>
         <WhatsAppButton />
         <SiteFooter />
       </body>

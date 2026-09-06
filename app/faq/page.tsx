@@ -1,5 +1,14 @@
 import Link from "next/link";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { JsonLd } from "@/components/seo/json-ld";
+import type { Metadata } from "next";
+import { absoluteUrl } from "@/lib/site";
+
+export const metadata: Metadata = {
+  title: "FAQ",
+  description: "Jawaban pertanyaan tentang program dan trial class Sabda Academy.",
+  alternates: { canonical: absoluteUrl("/faq") },
+};
 
 export default function FaqPage() {
   const groups = [
@@ -27,6 +36,15 @@ export default function FaqPage() {
   ];
   return (
     <section className="mx-auto max-w-4xl px-5 py-16">
+      <JsonLd data={{
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: groups.flatMap((group) => group.items.map(([question, answer]) => ({
+          "@type": "Question",
+          name: question,
+          acceptedAnswer: { "@type": "Answer", text: answer },
+        }))),
+      }} />
       <SectionHeading eyebrow="FAQ" title="Pertanyaan yang sering ditanyakan." description="Belum menemukan jawaban yang dicari? Tim kami siap membantu." />
       <div className="mt-12 space-y-8">
         {groups.map((group) => (

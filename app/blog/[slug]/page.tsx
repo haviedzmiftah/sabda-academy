@@ -4,6 +4,8 @@ import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { getMDXComponents } from "@/components/mdx/mdx-components";
 import { ArticleReadTracker } from "@/components/conversion/article-read-tracker";
+import { JsonLd } from "@/components/seo/json-ld";
+import { absoluteUrl } from "@/lib/site";
 import { getContentBySlug, getContentList, getContentSlugs } from "@/lib/content";
 
 export function generateStaticParams() {
@@ -42,6 +44,16 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
     return (
       <div className="mx-auto max-w-6xl px-5 py-16">
         <ArticleReadTracker slug={meta.slug} />
+        <JsonLd data={{
+          "@context": "https://schema.org",
+          "@type": "Article",
+          headline: meta.title,
+          description: meta.description,
+          datePublished: meta.date,
+          author: { "@type": "Organization", name: meta.author },
+          articleSection: meta.category,
+          mainEntityOfPage: absoluteUrl(`/blog/${meta.slug}`),
+        }} />
         <article className="prose prose-slate mx-auto max-w-3xl prose-headings:font-display prose-headings:text-ink">
           <Link href="/blog" className="not-prose focus-ring inline-block font-bold text-blue-700">&larr; Kembali ke blog</Link>
           <p className="not-prose mt-8 font-mono text-sm font-bold uppercase tracking-[0.18em] text-blue-700">{meta.category}</p>
