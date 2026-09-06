@@ -1,4 +1,7 @@
+ "use client";
+
 import Link from "next/link";
+import { trackEvent } from "@/lib/analytics";
 
 type ButtonLinkProps = {
   href: string;
@@ -17,6 +20,7 @@ export function ButtonLink({ href, children, variant = "primary", className = ""
     <Link
       href={href}
       className={`focus-ring inline-flex min-h-12 items-center justify-center rounded-full px-6 py-3 font-bold transition-colors ${styles} ${className}`}
+      onClick={() => trackEvent("cta_click", { destination: href })}
     >
       {children}
     </Link>

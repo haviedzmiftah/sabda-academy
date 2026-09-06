@@ -3,6 +3,8 @@ import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import "../app/globals.css";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
+import { WhatsAppButton } from "@/components/conversion/whatsapp-button";
+import { GoogleAnalytics } from "@/components/analytics/google-analytics";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -35,8 +37,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="id" className={`${inter.variable} ${jakarta.variable}`}>
       <body className="font-sans antialiased">
+        <GoogleAnalytics />
         <SiteHeader />
         <main>{children}</main>
+        <WhatsAppButton />
         <SiteFooter />
       </body>
     </html>
