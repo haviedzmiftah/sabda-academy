@@ -51,6 +51,10 @@ export function getContentList(type: ContentType) {
     .sort((a, b) => b.date.localeCompare(a.date));
 }
 
+export function getContentCategories(type: ContentType) {
+  return [...new Set(getContentList(type).map((content) => content.category))];
+}
+
 export function getContentBySlug(type: ContentType, slug: string) {
   const fileName = `${slug}.mdx`;
   const filePath = path.join(contentDirectory(type), fileName);
