@@ -128,7 +128,12 @@ export default function HomePage() {
       <section className="bg-ink text-white">
         <div className="mx-auto grid max-w-6xl gap-10 px-5 py-20 md:grid-cols-2 md:items-center">
           <div>
-            <SectionHeading eyebrow="Cerita dari orang tua" title="“Sekarang anak saya punya ide, lalu tahu cara membuatnya.”" description="Kami percaya rasa percaya diri tumbuh ketika anak diberi ruang untuk mencoba." />
+            <SectionHeading
+              dark
+              eyebrow="Cerita dari orang tua"
+              title="“Sekarang anak saya punya ide, lalu tahu cara membuatnya.”"
+              description="Kami percaya rasa percaya diri tumbuh ketika anak diberi ruang untuk mencoba."
+            />
           </div>
           <blockquote className="rounded-3xl bg-white/10 p-8">
             <p className="text-lg leading-8 text-blue-50">“Awalnya hanya ikut trial. Setelah itu, ia mulai membuat game sendiri dan dengan bangga menceritakannya di rumah.”</p>
