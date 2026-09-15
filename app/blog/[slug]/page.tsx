@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
+import remarkGfm from "remark-gfm";
 import { getMDXComponents } from "@/components/mdx/mdx-components";
 import { ArticleReadTracker } from "@/components/conversion/article-read-tracker";
 import { JsonLd } from "@/components/seo/json-ld";
@@ -62,7 +63,15 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
             <span>{meta.author}</span><span aria-hidden="true">·</span><span>{meta.date}</span><span aria-hidden="true">·</span><span>{meta.readingTime} baca</span>
           </div>
           <p className="not-prose mt-6 text-lg leading-8 text-slate-600">{meta.description}</p>
-          <MDXRemote source={source} components={getMDXComponents({})} />
+          <MDXRemote
+            source={source}
+            components={getMDXComponents({})}
+            options={{
+              mdxOptions: {
+                remarkPlugins: [remarkGfm],
+              },
+            }}
+          />
         </article>
         {relatedPosts.length > 0 ? (
           <aside className="mx-auto mt-16 max-w-3xl border-t border-slate-200 pt-10">

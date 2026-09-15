@@ -22,7 +22,7 @@ function contentDirectory(type: ContentType) {
 }
 
 function parseMeta(fileName: string, type: ContentType): ContentMeta {
-  const slug = fileName.replace(/\.mdx$/, "");
+  const slug = fileName.replace(/\.(mdx|md)$/, "");
   const source = fs.readFileSync(path.join(contentDirectory(type), fileName), "utf8");
   const { data } = matter(source);
 
@@ -31,7 +31,7 @@ function parseMeta(fileName: string, type: ContentType): ContentMeta {
     slug: String(data.slug ?? slug),
     description: String(data.description ?? ""),
     image: data.image ? String(data.image) : undefined,
-    category: String(data.category ?? type),
+    category: String(data.category ?? (Array.isArray(data.tags) && data.tags[0] ? data.tags[0] : type)),
     date: String(data.date ?? ""),
     author: String(data.author ?? "Sabda Academy"),
     readingTime: String(data.readingTime ?? "5 menit"),
@@ -41,8 +41,8 @@ function parseMeta(fileName: string, type: ContentType): ContentMeta {
 export function getContentSlugs(type: ContentType) {
   return fs
     .readdirSync(contentDirectory(type))
-    .filter((fileName) => fileName.endsWith(".mdx"))
-    .map((fileName) => fileName.replace(/\.mdx$/, ""));
+    .filter((fileName) => /\.(mdx|md)$/.test(fileName))
+    .map((fileName) => fileName.replace(/\.(mdx|md)$/, ""));
 }
 
 export function getContentList(type: ContentType) {
@@ -56,12 +56,13 @@ export function getContentCategories(type: ContentType) {
 }
 
 export function getContentBySlug(type: ContentType, slug: string) {
-  const fileName = `${slug}.mdx`;
-  const filePath = path.join(contentDirectory(type), fileName);
-  if (!fs.existsSync(filePath)) {
+  const candidates = [`${slug}.mdx`, `${slug}.md`];
+  const fileName = candidates.find((name) => fs.existsSync(path.join(contentDirectory(type), name)));
+  if (!fileName) {
     throw new Error(`Content not found: ${type}/${slug}`);
   }
 
+  const filePath = path.join(contentDirectory(type), fileName);
   const source = fs.readFileSync(filePath, "utf8");
   const { content } = matter(source);
   return { meta: parseMeta(fileName, type), source: content };
